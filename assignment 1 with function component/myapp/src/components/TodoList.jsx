@@ -12,6 +12,7 @@ const TodoList = () => {
     if (taskName.trim() === '') return;
 
     const newTask = {
+      id: Date.now(), 
       name: taskName,
       description: taskDesc,
       done: false,
@@ -22,8 +23,8 @@ const TodoList = () => {
     setTaskDesc('');
   };
 
-  const removeTask = (indexToRemove) => {
-    setTasks(prev => prev.filter((_, index) => index !== indexToRemove));
+  const removeTask = (idToRemove) => {
+    setTasks(prev => prev.filter(task => task.id !== idToRemove));
   };
 
   return (
@@ -48,22 +49,21 @@ const TodoList = () => {
       <div>
         <h3>My To-Do List</h3>
         <ul>
-            {tasks.map((task, index) => (
-            <li key={index}>
-            <span>{task.name}: {task.description}</span>
-            {' '}
-            <a
+          {tasks.map((task) => (
+            <li key={task.id}>
+              <span>{task.name}: {task.description}</span>{' '}
+              <a
                 href="#"
-            onClick={(e) => {
-             e.preventDefault();
-            removeTask(index);
-            }}
-             style={{ color: 'blue', textDecoration: 'underline', cursor: 'pointer' }}
-            >
+                onClick={(e) => {
+                  e.preventDefault();
+                  removeTask(task.id);
+                }}
+                style={{ color: 'blue', textDecoration: 'underline', cursor: 'pointer' }}
+              >
                 Done
-        </a>
+              </a>
             </li>
-                ))}
+          ))}
         </ul>
       </div>
     </div>
