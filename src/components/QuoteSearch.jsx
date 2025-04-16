@@ -29,7 +29,7 @@ const QuoteSearch = () => {
             <p>- {quote.author}</p>
           </li>
         ) : (
-          <p>Click the button to generate a quote!</p>
+          <p>Get your quote</p>
         )}
       </ul>
     </div>
